@@ -1,9 +1,12 @@
-
+import { Route, Routes } from "react-router-dom";
+import Form from "./components/form";
 
 function App() {
   return (
     <div className="App">
-<h1>Form app</h1>
+      <Routes>
+        <Route path="/" element={<Form />} />
+      </Routes>
     </div>
   );
 }
