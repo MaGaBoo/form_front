@@ -10,10 +10,28 @@ body {
     font-size: 1.5rem;
 }
 
-.container {
+.Container {
     max-width: 60rem;
     margin: 0 auto;
 }
+
+/* These classes are related to a discarded toggle theme button
+
+.Container-pink {
+background-color: #ffc0f0;
+color: #0F0C11
+}
+
+.Container-dark {
+background-color: #0F0C11;
+color: #ffc0f0
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 1.5rem;
+} */
+
 .form-wrapper {
     margin: 5rem auto 0;
     width: 15rem;
@@ -21,6 +39,7 @@ body {
 
 input {
     background-color: transparent;
+    color: #FFF;
     padding: 0 0.5rem;
     width: 20rem;
     height: 2rem;
