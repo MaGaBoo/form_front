@@ -3,42 +3,53 @@ body {
     font-weight: 300;
     color: #FFFFFF;
     background-color: #0F0C11;
+    
 }
-
 .header {
-    color: #ffc0f0
+    color: #ffc0f0;
+    font-size: 1.5rem;
 }
 
+.container {
+    max-width: 60rem;
+    margin: 0 auto;
+}
 .form-wrapper {
     margin: 5rem auto 0;
-    width: 24rem;
+    width: 15rem;
 }
 
 input {
+    background-color: transparent;
     padding: 0 0.5rem;
-    width: inherit;
+    width: 20rem;
     height: 2rem;
-    border-radius: 4px;
     margin-bottom: 1.5rem;
     margin-right: 0.8rem;
     border: none;
+    border-bottom: 0.1rem solid #ffc0f0;
     box-sizing: border-box;
 }
 
+.errors {
+    font-size: 0.7rem;
+    text-align: left;
+}
+
 .submit-btn {
-    width: 23rem;
+    width: 20rem;
     height: 2.5rem;
     font-size: 1rem;
     color: #ffc0f0;
-    outline: 0.2rem solid #ffc0f0;
+    outline: 0.1rem solid #ffc0f0;
     border-radius: 9999px;
     background: transparent;
     cursor: pointer;
     transition: outline 0.6s linear;
-    margin: 0.5em;
+    margin-bottom: 2rem;
 }
 
 .submit-btn:hover { 
-    outline-width: 0.3rem; 
+    outline-width: 0.4rem; 
 }
 

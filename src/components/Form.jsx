@@ -8,7 +8,7 @@ import "./Form.css";
 
 const schema = yup
   .object({
-    name: yup.string().required("Name is a required field"),
+    name: yup.string().required("Field name is required"),
     surname: yup.string().required("Surname is a required field"),
     email: yup
       .string()
@@ -16,25 +16,26 @@ const schema = yup
       .required("Email is a required field"),
     mobile: yup
       .number()
-      .min(9)
+      .min(9, 'Please provide a valid mobile telephone format')
       .required("Please provide a mobile phone to contact!"),
     link: yup
       .string()
       .required("Please, provide your portfolio or social platform link"),
-    message: yup.string().min(1).required("Please, tell something about you!"),
+    message: yup.string().min(3, "Your message must contain at least three characters").required(),
   })
   .required();
 
 const Form = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState(false);
 
-  const { register, handleSubmit, reset } = useForm({
+  const { register, handleSubmit, reset, formState:{ errors} } = useForm({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+
+      setIsSubmitting(true);
+
     if (!data) {
       console.log("Ups, something went wrong!");
     } else {
@@ -42,58 +43,59 @@ const Form = () => {
         .then((newContact) => {
           reset();
         })
-        .catch((error) => setErrors(error?.response?.data?.errors));
+        .catch((error) => (error?.response?.data?.errors))
+        .finally(setIsSubmitting)
     }
-
-    setIsSubmitting(true);
   };
 
   return (
     <div className="container">
       <div className="form-wrapper">
-        <h2 className="header">Let´s talk!</h2>
+        <h1 className="header">Contact with us:</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            {...register("name")}
-            placeholder="name"
+            {...register("name", { required: true})} 
+            placeholder="Name"
             type="text"
-            required
+          /> 
+           {errors && <p className="errors">{errors.name?.message}</p>}
+            
+          <input
+            {...register("surname", { required: true})}
+            placeholder="Surname"
+            type="text"
           />
+             {errors && <p className="errors">{errors.surname?.message}</p>}
 
           <input
-            {...register("surname")}
-            placeholder="surname"
-            type="text"
-            required
-          />
-
-          <input
-            {...register("email")}
-            placeholder="email"
+            {...register("email", { required: true})}
+            placeholder="Email"
             type="email"
             required
           />
+            {errors && <p className="errors">{errors.email?.message}</p>}
 
           <input
-            {...register("mobile")}
-            placeholder="mobile"
+            {...register("mobile", { required: true})}
+            placeholder="Mobile"
             type="number"
-            required
           />
+          {errors && <p className="errors">{errors.mobile?.message}</p>}
 
           <input
-            {...register("link")}
-            placeholder="portfolio or social url"
+            {...register("link", { required: true})}
+            placeholder="Your portfolio or social url"
             type="text"
             required
           />
+             {errors && <p className="errors">{errors.link?.message}</p>}
 
           <input
-            {...register("message")}
+            {...register("message", { required: true})}
             placeholder="Write your message here"
             type="text"
-            required
           />
+           {errors && <p className="errors">{errors.message?.message}</p>}
 
           <button className="submit-btn">Submit</button>
         </form>
