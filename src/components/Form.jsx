@@ -16,8 +16,10 @@ const schema = yup
       .required("Email is a required field"),
     mobile: yup
       .number()
-      .min(9, "Please provide a valid mobile telephone format")
-      .required("Please provide a mobile phone to contact!"),
+      .required("Please provide a mobile phone to contact!")
+      .positive()
+      .integer()
+      .min(9, "Please provide a valid mobile telephone format"),
     link: yup
       .string()
       .required("Please, provide your portfolio or social platform link"),
@@ -51,7 +53,7 @@ const Form = () => {
           reset();
         })
         .catch((error) => error?.response?.data?.errors)
-        .finally(setIsSubmitting);
+        .finally(setIsSubmitting(true));
     }
   };
 
@@ -83,9 +85,9 @@ const Form = () => {
             {errors && <p className="errors">{errors.email?.message}</p>}
 
             <input
-              {...register("mobile", { required: true })}
+              {...register("mobile", { required: true }, { min: 9})}
               placeholder="Mobile"
-              type="number"
+              type="text"
             />
             {errors && <p className="errors">{errors.mobile?.message}</p>}
 
@@ -105,6 +107,8 @@ const Form = () => {
             {errors && <p className="errors">{errors.message?.message}</p>}
 
             <button className="submit-btn">Submit</button>
+            {isSubmitting === true ? <p className="submitted-message">Form successfully submitted, thank you!</p>
+             : null}
           </form>
         </div>
       </div>

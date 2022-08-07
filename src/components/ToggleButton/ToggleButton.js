@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { PinkModeContext } from "../context/PinkModeContext";
+import { PinkModeContext } from "../../context/PinkModeContext";
 
 
 function ToggleButton() {
